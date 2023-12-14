@@ -6,13 +6,13 @@ D = Decimal
 E, PI = D(1).exp(), D(f'{pi:.50f}')
 k = D("0.0100000000")
 
-
+# an example function f in the equation y' = f(t, y), here it is y' = k*(3*exp(c*t^2) - 3 - y)
 def f(t, y):
     c = D("-0.0015")
     return k*(3*(c*t*t).exp() - 3 - y)
 
 
-
+# returns the data points of y in the O.D.E. of the form y' = f(t, y) from 0 to t_f with initial value y(t_0) = y0_at0
 def SSPRK3(func, h, y0at0, t_f):
     b1 = b2 = 1/D(6)
     b3 = 2*b2
@@ -36,14 +36,5 @@ def SSPRK3(func, h, y0at0, t_f):
     print("DONE!")
     return vals
 
-telemetry = SSPRK3(f, D("1E-4"), 30, 1200)
-
-tel = open("C:/Users/Hüseyin Bıyıklı/Desktop/tele.txt", 'w')
-
-
-for tpl in telemetry[::10000]:
-    tel.write(str(tpl[0]).replace(".", ",") + " | " + str(tpl[1]).replace(".",",") + '\n')
-
-
-tel.flush()
-tel.close()
+if __name__ == '__main__':
+    print(SSPRK3(f, D("0.01"), 0, 2))

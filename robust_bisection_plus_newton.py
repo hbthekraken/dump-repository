@@ -1,6 +1,7 @@
 import numpy as np
 
-
+# divides the given 'domain' interval to n pieces, then looks for roots with Newton's method, assuming f is continuous on the given domain, 
+# which ensures the proximity of the initial guess of the root to the actual root
 def find_root(f, der_f, error_tol, n=1000, domain=(-10000, 10000)):    
     x = np.linspace(domain[0], domain[1], num=n)
     
@@ -50,7 +51,7 @@ def find_root(f, der_f, error_tol, n=1000, domain=(-10000, 10000)):
             if diff < 0.01*error_tol or i > n*10:
                 return x_n
 
-##P = np.polynomial.Polynomial.fromroots([0.999, 1, 1.001, 2, 3, 5])
+# below there is an example function applied to the function above
 def g(x):   return x*x + np.exp(x*x) - 7
 
 
